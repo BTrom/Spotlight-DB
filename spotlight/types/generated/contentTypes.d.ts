@@ -601,10 +601,7 @@ export interface ApiGameGame extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-<<<<<<< HEAD
     banner_image: Schema.Attribute.String;
-=======
->>>>>>> origin/main
     categories: Schema.Attribute.Relation<
       'oneToMany',
       'api::category.category'
@@ -756,10 +753,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-<<<<<<< HEAD
     background_image: Schema.Attribute.String;
-=======
->>>>>>> origin/main
     content: Schema.Attribute.RichText & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -823,10 +817,7 @@ export interface ApiReviewReview extends Struct.CollectionTypeSchema {
     url: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-<<<<<<< HEAD
     user_votes: Schema.Attribute.Integer;
-=======
->>>>>>> origin/main
   };
 }
 
@@ -864,10 +855,7 @@ export interface ApiReviewsHistoryEntryReviewsHistoryEntry
     publishedAt: Schema.Attribute.DateTime;
     source: Schema.Attribute.Relation<'oneToOne', 'api::source.source'>;
     timestamp: Schema.Attribute.Date & Schema.Attribute.Required;
-<<<<<<< HEAD
     total_reviews: Schema.Attribute.BigInteger & Schema.Attribute.Required;
-=======
->>>>>>> origin/main
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

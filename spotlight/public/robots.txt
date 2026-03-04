@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 User-agent: *
 Allow: /
 Disallow: /api/
 
 Sitemap: https://spotlight-db.com/sitemap-index.xml
-=======
-# To prevent search engines from seeing the site altogether, uncomment the next two lines:
-# User-Agent: *
-# Disallow: /
->>>>>>> origin/main

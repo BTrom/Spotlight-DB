@@ -29,12 +29,9 @@
       "type": "string",
       "unique": true
     },
-<<<<<<< HEAD
     "banner_image": {
       "type": "string"
     },
-=======
->>>>>>> origin/main
     "description": {
       "type": "text"
     },

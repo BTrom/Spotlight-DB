@@ -38,10 +38,7 @@ interface Post {
   id: number;
   documentId: string;
   title: string;
-<<<<<<< HEAD
   slug?: string;
-=======
->>>>>>> origin/main
   content: string;
   createdAt: string;
   game?: {
@@ -63,15 +60,11 @@ function HeroSection({ game }: { game: Game }) {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-surface-border bg-surface-dark/40 backdrop-blur-sm rounded-lg overflow-hidden shadow-2xl shadow-black/50">
       <div className="relative overflow-hidden group min-h-[450px] lg:min-h-[550px] flex flex-col justify-between p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-surface-border">
-<<<<<<< HEAD
         <img 
           className="absolute inset-0 w-full h-full z-0 opacity-50 mix-blend-luminosity hover:mix-blend-normal group-hover:opacity-60 transition-all duration-700 object-cover" 
           src={game.cover_image || "/fallback-cyberpunk-bg.jpg"} 
           alt={`Cover art for ${game.title}`}
         />
-=======
-        <img className="absolute inset-0 z-0 opacity-50 mix-blend-luminosity hover:mix-blend-normal group-hover:opacity-60 transition-all duration-700 object-cover" src={game.cover_image || "/fallback-cyberpunk-bg.jpg"} alt={ `Cover art for ${game.title}` }/>
->>>>>>> origin/main
         <div className="absolute inset-0 z-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-background-dark/90 via-transparent to-transparent"></div>
         <div className="relative z-10">
@@ -204,14 +197,10 @@ function ReportsSection({ posts }: { posts: Post[] }) {
         {posts.map((post, i) => (
           <article key={i} className="flex flex-col md:flex-row glass-panel rounded-lg hover:border-primary/30 transition-all group relative overflow-hidden shadow-lg">
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-300"></div>
-<<<<<<< HEAD
             <div 
               className="w-full md:w-72 aspect-video md:aspect-auto shrink-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" 
               style={{ backgroundImage: `url(${post.game?.cover_image || "/fallback-cyberpunk-bg.jpg"})` }}
             >
-=======
-            <div className="w-full md:w-72 aspect-video md:aspect-auto shrink-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-500" style={{ backgroundImage: post.game?.cover_image || "/fallback-cyberpunk-bg.jpg" }}>
->>>>>>> origin/main
               <div className="w-full h-full bg-black/40 group-hover:bg-transparent transition-colors"></div>
             </div>
             <div className="flex flex-col justify-between flex-1 p-6 gap-4">
@@ -223,11 +212,7 @@ function ReportsSection({ posts }: { posts: Post[] }) {
                     <span className="material-symbols-outlined text-[12px]">schedule</span> {getTimeSince(post.createdAt)}
                   </span>
                   <span className="text-text-secondary text-[10px] font-mono uppercase flex items-center gap-1">
-<<<<<<< HEAD
                     <span className="material-symbols-outlined text-[12px]">dataset</span> Source: {getReviewStats(post.game?.reviews).count} comments
-=======
-                    <span className="material-symbols-outlined text-[12px]">dataset</span> Source: {getReviewStats(post.game?.reviews).count}
->>>>>>> origin/main
                   </span>
                 </div>
                 <h3 className="text-white text-xl font-bold uppercase tracking-tight mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
@@ -235,30 +220,17 @@ function ReportsSection({ posts }: { posts: Post[] }) {
                   <span className="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity text-sm translate-x-[-10px] group-hover:translate-x-0 duration-300">arrow_outward</span>
                 </h3>
                 <p className="text-text-secondary text-sm leading-relaxed max-w-4xl">
-<<<<<<< HEAD
                   {truncateText(post.content, 250)}
-=======
-                  {truncateText(post.content, 140)}
->>>>>>> origin/main
                 </p>
               </div>
               <div className="flex items-center justify-between border-t border-white/5 pt-4 mt-2">
                 <div className="flex items-center gap-4 text-xs font-mono text-text-secondary">
-<<<<<<< HEAD
                   <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[14px] text-accent-green">thumb_up</span> {getReviewStats(post.game?.reviews).positivePercent}% Positive</span>
                   <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[14px] text-red-500">thumb_down</span> {100 - getReviewStats(post.game?.reviews).positivePercent}% Negative</span>
                 </div>
                 <a href={`/posts/${post.slug || post.documentId}`} className="text-secondary text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer group/link">
                   Read Report <span className="material-symbols-outlined text-[14px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
-=======
-                  <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[14px] text-accent-green">thumb_up</span> {getReviewStats(post.game?.reviews).positivePercent} Positive</span>
-                  <span className="flex items-center gap-1"><span className="material-symbols-outlined text-[14px] text-red-500">thumb_down</span> {100 - getReviewStats(post.game?.reviews).positivePercent} Negative</span>
-                </div>
-                <span className="text-secondary text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer group/link">
-                  Read Report <span className="material-symbols-outlined text-[14px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
-                </span>
->>>>>>> origin/main
               </div>
             </div>
           </article>
@@ -280,12 +252,7 @@ function PlayerCountGraph({ history }: { history?: PlayerCount[] }) {
     return <div className="text-text-secondary text-xs h-full flex items-center">NO DATA</div>;
   }
 
-<<<<<<< HEAD
   const previousEntries = history.slice(0, -1).slice(-48);
-=======
-  // Pluck off the final number, leaving the rest for the graph
-  const previousEntries = history.slice(0, -1);
->>>>>>> origin/main
   const counts = previousEntries.map(h => Number(h.player_count));
 
   const max = Math.max(...counts, 1);
@@ -316,11 +283,7 @@ function HeroPlayerCountGraph({ history }: { history?: PlayerCount[] }) {
     return <div className="text-text-secondary h-full flex items-center justify-center font-mono text-sm">AWAITING DATA GATHERING</div>;
   }
 
-<<<<<<< HEAD
   const previousEntries = history.slice(0, -1).slice(-128);
-=======
-  const previousEntries = history.slice(0, -1);
->>>>>>> origin/main
   const counts = previousEntries.map(h => Number(h.player_count));
   
   const max = Math.max(...counts, 1);
@@ -378,11 +341,7 @@ function getReviewStats(reviews?: Review[]) {
   return { count: reviews.length, positivePercent };
 }
 
-<<<<<<< HEAD
 function truncateText(text: string, maxLength: number = 150) {
-=======
-function truncateText(text: string, maxLength: number = 120) {
->>>>>>> origin/main
   if (!text) return "";
   return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 }

@@ -41,12 +41,9 @@
     "comment": {
       "type": "text"
     },
-<<<<<<< HEAD
     "user_votes": {
       "type": "integer"
     },
-=======
->>>>>>> origin/main
     "url": {
       "type": "string",
       "required": true,

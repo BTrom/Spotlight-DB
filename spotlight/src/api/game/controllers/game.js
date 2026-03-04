@@ -43,7 +43,6 @@ module.exports = createCoreController('api::game.game', ({ strapi }) => ({
 
             // 3. Iterate over the provided UUIDs
             for (const id of itadIds) {
-<<<<<<< HEAD
                 try {
                     // Fetch data from the ITAD API
                     const response = await fetch(`https://api.isthereanydeal.com/games/info/v2?key=9fc8660f82440819fa2af0af9030bad2c618ec93&id=${id}`);
@@ -92,46 +91,6 @@ module.exports = createCoreController('api::game.game', ({ strapi }) => ({
                     strapi.log.error('ITAD Sync Error:', error);
                     ctx.internalServerError('An error occurred during the sync process.');
                 }
-=======
-                // Fetch data from the ITAD API
-                const response = await fetch(`https://api.isthereanydeal.com/games/info/v2?key=9fc8660f82440819fa2af0af9030bad2c618ec93&id=${id}`);
-                const rawData = await response.json();
-                
-                if (!response.ok) {
-                    strapi.log.warn(`Failed to fetch data for ID: ${id}`);
-                    continue; 
-                }
-
-                const itadData = Array.isArray(rawData) ? rawData[0] : rawData;
-
-                // Log exactly what the script sees before looping
-                strapi.log.info(`[SYNCING] ${itadData.title} | Tags found: ${itadData.tags ? itadData.tags.length : 'UNDEFINED'}`);
-
-                const categoryIds = await Promise.all(
-                    (itadData.tags || []).map(tag => findOrCreateRelation('api::category.category', tag))
-                );
-                const developerIds = await Promise.all(
-                    (itadData.developers || []).map(dev => findOrCreateRelation('api::company.company', dev.name))
-                );
-                const publisherIds = await Promise.all(
-                    (itadData.publishers || []).map(pub => findOrCreateRelation('api::company.company', pub.name))
-                );
-
-                const newGame = await strapi.documents('api::game.game').create({
-                    data: {
-                        slug: itadData.slug,
-                        title: itadData.title,
-                        steam_appid: itadData.appid,
-                        categories: categoryIds,
-                        release_date: itadData.releaseDate,
-                        developers: developerIds, 
-                        publishers: publisherIds,
-                    },
-                    status: 'published'
-                });
-
-                results.push(newGame);
->>>>>>> origin/main
             }
 
             ctx.send({ message: 'Sync complete', syncedGames: results.length });

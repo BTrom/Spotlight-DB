@@ -30,12 +30,9 @@
       "type": "richtext",
       "required": true
     },
-<<<<<<< HEAD
     "background_image": {
       "type": "string"
     },
-=======
->>>>>>> origin/main
     "seo": {
       "type": "component",
       "component": "shared.seo-component",

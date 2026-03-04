@@ -38,11 +38,7 @@ try {
     gridData = sortedGames.slice(1, 5);  // #2 through #5 go to Trending
 
 	// Fetch the latest 4 posts, populating the game, and the game's nested categories and reviews
-<<<<<<< HEAD
 	const postsResponse = await fetch('http://127.0.0.1:1337/api/posts?populate[game][populate]=*&sort=createdAt:desc&pagination[limit]=4');
-=======
-	const postsResponse = await fetch('http://127.0.0.1:1337/api/posts?populate=*&sort=createdAt:desc&pagination[limit]=4');
->>>>>>> origin/main
 	
 	if (postsResponse.ok) {
 		const postsJson = await postsResponse.json();

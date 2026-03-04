@@ -1,6 +1,5 @@
 'use strict';
 
-<<<<<<< HEAD
 const { createCoreController } = require('@strapi/strapi').factories;
 
 module.exports = createCoreController('api::review.review', ({ strapi }) => ({
@@ -159,12 +158,3 @@ module.exports = createCoreController('api::review.review', ({ strapi }) => ({
         return ctx.send(commentsOnly);
     }
 }));
-=======
-/**
- * review controller
- */
-
-const { createCoreController } = require('@strapi/strapi').factories;
-
-module.exports = createCoreController('api::review.review');
->>>>>>> origin/main

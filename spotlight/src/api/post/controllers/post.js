@@ -1,6 +1,5 @@
 'use strict';
 
-<<<<<<< HEAD
 const { createCoreController } = require('@strapi/strapi').factories;
 // Import the necessary Enums from the SDK to fix the type errors
 const { GoogleGenAI, HarmCategory, HarmBlockThreshold, Type } = require('@google/genai');
@@ -135,12 +134,3 @@ module.exports = createCoreController('api::post.post', ({ strapi }) => ({
         }
     }
 }));
-=======
-/**
- * post controller
- */
-
-const { createCoreController } = require('@strapi/strapi').factories;
-
-module.exports = createCoreController('api::post.post');
->>>>>>> origin/main

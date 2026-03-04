@@ -10,13 +10,10 @@ module.exports = (config) => {
     },
     server: {
       allowedHosts: ['spotlight-db.com'],
-<<<<<<< HEAD
       port: 5174,
       hmr: {
         clientPort: 5173,
       },
-=======
->>>>>>> origin/main
     },
   });
 };
