@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "player_count_entries",
+  "info": {
+    "singularName": "player-count-entry",
+    "pluralName": "player-count-entries",
+    "displayName": "Player Count Entry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "game": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game.game",
+      "private": true,
+      "inversedBy": "player_count_history"
+    },
+    "timestamp": {
+      "type": "date",
+      "required": true
+    },
+    "player_count": {
+      "type": "biginteger",
+      "required": true,
+      "min": "0"
+    }
+  }
+}

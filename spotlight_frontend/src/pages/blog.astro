@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogHub from '../components/BlogHub.tsx';
+import Sidebar from '../components/Sidebar.tsx';
+import Navbar from '../components/Navbar.tsx';
+import Footer from '../components/Footer.tsx';
+
+let posts = [];
+let fetchError = false;
+
+try {
+  // Fetch posts sorted by newest first
+  const postsResponse = await fetch('http://127.0.0.1:1337/api/posts?populate=*&sort=createdAt:desc');
+  
+  if (postsResponse.ok) {
+    const json = await postsResponse.json();
+    if (json.data && Array.isArray(json.data)) {
+      posts = json.data;
+    }
+  } else {
+    throw new Error(`Strapi responded with status: ${postsResponse.status}`);
+  }
+} catch (error) {
+  console.error("Backend connection failed:", error);
+  fetchError = true;
+}
+---
+
+<Layout>
+  {fetchError ? (
+    <div class="min-h-screen flex items-center justify-center bg-surface-dark text-white font-mono">
+      <div class="border border-red-500/50 bg-red-500/10 p-6 rounded">
+        <h2 class="text-xl font-bold text-red-500 mb-2">SYSTEM ERROR</h2>
+        <p>Unable to connect to SpotlightDB to retrieve posts.</p>
+      </div>
+    </div>
+  ) : (
+    <div class="fixed inset-0 pointer-events-none z-0 bg-grid-pattern opacity-30 bg-[length:var(--background-size-grid-pattern)]"></div>
+    <Sidebar index={2} />
+    <div class="relative flex flex-1 flex-col h-full overflow-hidden z-10">
+      <Navbar />
+      <main class="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-10 scrollbar-hide">
+        <div class="flex flex-col max-w-[1600px] mx-auto w-full gap-8">
+          <BlogHub posts={posts} client:load />
+          <Footer />
+        </div>
+      </main>
+    </div>
+  )}
+</Layout>

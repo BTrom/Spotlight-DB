@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sources",
+  "info": {
+    "singularName": "source",
+    "pluralName": "sources",
+    "displayName": "Source"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "site": {
+      "type": "text",
+      "required": true,
+      "unique": true
+    },
+    "platforms": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::platform.platform"
+    }
+  }
+}

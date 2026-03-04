@@ -1,0 +1,93 @@
+{
+  "kind": "collectionType",
+  "collectionName": "games",
+  "info": {
+    "singularName": "game",
+    "pluralName": "games",
+    "displayName": "Game"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "steam_appid": {
+      "type": "biginteger",
+      "required": true,
+      "unique": true
+    },
+    "cover_image": {
+      "type": "string",
+      "unique": true
+    },
+<<<<<<< HEAD
+    "banner_image": {
+      "type": "string"
+    },
+=======
+>>>>>>> origin/main
+    "description": {
+      "type": "text"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "release_date": {
+      "type": "date",
+      "required": true
+    },
+    "developers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::company.company",
+      "mappedBy": "games_developed"
+    },
+    "publishers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::company.company",
+      "mappedBy": "games_published"
+    },
+    "mature": {
+      "type": "boolean"
+    },
+    "early_access": {
+      "type": "boolean"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "game"
+    },
+    "player_count_history": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::player-count-entry.player-count-entry",
+      "mappedBy": "game"
+    },
+    "reviews_history": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::reviews-history-entry.reviews-history-entry",
+      "mappedBy": "game"
+    },
+    "post": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::post.post",
+      "mappedBy": "game"
+    }
+  }
+}

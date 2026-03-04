@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Post"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "game": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::game.game",
+      "inversedBy": "post"
+    },
+    "slug": {
+      "type": "uid",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+<<<<<<< HEAD
+    "background_image": {
+      "type": "string"
+    },
+=======
+>>>>>>> origin/main
+    "seo": {
+      "type": "component",
+      "component": "shared.seo-component",
+      "repeatable": false
+    }
+  }
+}

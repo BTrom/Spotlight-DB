@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import App from '../components/App.tsx';
+import Sidebar from '../components/Sidebar.tsx';
+import Navbar from '../components/Navbar.tsx';
+import Footer from '../components/Footer.tsx';
+
+// Initialize fallback variables
+let heroData = null;
+let gridData = [];
+let latestPosts = [];
+let fetchError = false;
+
+try {
+  const gameResponse = await fetch('http://127.0.0.1:1337/api/games?populate=*&pagination[limit]=100');
+  
+  if (!gameResponse.ok) {
+    throw new Error(`Strapi responded with status: ${gameResponse.status}`);
+  }
+  
+  const json = await gameResponse.json();
+  
+  if (json.data && Array.isArray(json.data) && json.data.length > 0) {
+    // 1. Sort by the most recent CCU count
+    const sortedGames = json.data.sort((a, b) => {
+      const getCCU = (game) => {
+        const history = game.player_count_history;
+        if (!history || history.length === 0) return 0;
+        // Get the last entry in the array
+        return Number(history[history.length - 1].player_count);
+      };
+      // Descending order
+      return getCCU(b) - getCCU(a);
+    });
+
+    // 2. Distribute the top 5
+    heroData = sortedGames[0];           // #1 goes to Hero
+    gridData = sortedGames.slice(1, 5);  // #2 through #5 go to Trending
+
+	// Fetch the latest 4 posts, populating the game, and the game's nested categories and reviews
+<<<<<<< HEAD
+	const postsResponse = await fetch('http://127.0.0.1:1337/api/posts?populate[game][populate]=*&sort=createdAt:desc&pagination[limit]=4');
+=======
+	const postsResponse = await fetch('http://127.0.0.1:1337/api/posts?populate=*&sort=createdAt:desc&pagination[limit]=4');
+>>>>>>> origin/main
+	
+	if (postsResponse.ok) {
+		const postsJson = await postsResponse.json();
+		if (postsJson.data && Array.isArray(postsJson.data)) {
+			latestPosts = postsJson.data;
+		}
+	}
+  }
+} catch (error) {
+  console.error("Backend connection failed:", error);
+  fetchError = true;
+}
+---
+
+<Layout>
+  {/* Conditional rendering to handle backend downtime or empty states */}
+  {fetchError ? (
+    <div class="min-h-screen flex items-center justify-center bg-surface-dark text-white font-mono">
+      <div class="border border-red-500/50 bg-red-500/10 p-6 rounded">
+        <h2 class="text-xl font-bold text-red-500 mb-2">SYSTEM ERROR</h2>
+        <p>Unable to connect to SpotlightDB. Please check the backend service.</p>
+      </div>
+    </div>
+  ) : (
+	<div class="fixed inset-0 pointer-events-none z-0 bg-grid-pattern opacity-30 bg-[length:var(--background-size-grid-pattern)]"></div>
+	<Sidebar index={0} />
+	<div class="relative flex flex-1 flex-col h-full overflow-hidden z-10">
+	<Navbar />
+		<main class="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-10 scrollbar-hide">
+			<div class="flex flex-col max-w-[1600px] mx-auto w-full gap-10">
+				<App heroGame={heroData} trendingGames={gridData} latestPosts={latestPosts} client:load />
+				<Footer />
+			</div>
+		</main>
+	</div>
+  )}
+</Layout>

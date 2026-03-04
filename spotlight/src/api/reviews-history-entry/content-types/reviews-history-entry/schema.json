@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews_history_entries",
+  "info": {
+    "singularName": "reviews-history-entry",
+    "pluralName": "reviews-history-entries",
+    "displayName": "Reviews History Entry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "game": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game.game",
+      "inversedBy": "reviews_history"
+    },
+    "source": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::source.source"
+    },
+    "timestamp": {
+      "type": "date",
+      "required": true
+    },
+<<<<<<< HEAD
+    "total_reviews": {
+      "type": "biginteger",
+      "required": true
+    },
+=======
+>>>>>>> origin/main
+    "averaged_score": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 100
+    }
+  }
+}

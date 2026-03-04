@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Review"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "game": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game.game",
+      "inversedBy": "reviews"
+    },
+    "source": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::source.source"
+    },
+    "score": {
+      "type": "integer",
+      "required": true,
+      "default": 50,
+      "min": 0,
+      "max": 100
+    },
+    "original_score": {
+      "type": "enumeration",
+      "enum": [
+        "score",
+        "positive",
+        "negative",
+        "neutral"
+      ]
+    },
+    "comment": {
+      "type": "text"
+    },
+<<<<<<< HEAD
+    "user_votes": {
+      "type": "integer"
+    },
+=======
+>>>>>>> origin/main
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

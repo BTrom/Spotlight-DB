@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Post from '../../components/Post.tsx';
+import Sidebar from '../../components/Sidebar.tsx';
+import Navbar from '../../components/Navbar.tsx';
+import Footer from '../../components/Footer.tsx';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+  try {
+    // Fetch all posts. Adjust pagination limit if you have many posts.
+    const response = await fetch('http://127.0.0.1:1337/api/posts?populate=*&pagination[limit]=100');
+    const json = await response.json();
+
+    if (!json.data) return [];
+
+    // Map each post to a route param (slug) and pass the post data as props
+    return json.data.map((post) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+  } catch (error) {
+    console.error("Failed to fetch posts for static paths:", error);
+    return [];
+  }
+}
+
+// Extract the post passed from getStaticPaths
+const { post } = Astro.props;
+
+// Parse the markdown content into HTML
+const htmlContent = marked.parse(post.content || '');
+
+// Fallback SEO title
+const metaTitle = post.seo?.metaTitle || `${post.title} - SpotlightDB`;
+const metaDesc = post.seo?.metaDescription || "AI-generated game analysis report.";
+---
+
+<Layout title={metaTitle} description={metaDesc}>
+  <div class="fixed inset-0 pointer-events-none z-0 bg-grid-pattern opacity-30 bg-[length:var(--background-size-grid-pattern)]"></div>
+  <Sidebar index={2} client:load />
+  
+  <div class="relative flex flex-1 flex-col h-full overflow-hidden z-10">
+    <Navbar client:load />
+    <main class="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide">
+      <Post post={post} htmlContent={htmlContent} client:load />
+      <Footer />
+    </main>
+  </div>
+</Layout>
